@@ -8,7 +8,7 @@ import javax.persistence.*
 data class Libro(
     @Id
     @Column(name="codigo_libro")
-    val id:String,
+    var id:String,
 
     @Column(name="isbn_libro")
     var isbn_libro:String,
@@ -16,10 +16,8 @@ data class Libro(
     @Column(name="stock")
     var cantidad:Int,
 
-
     @Column(name="nombre_Libro")
     var nombre_Libro:String,
-
 
     @ManyToOne
     @JoinColumn(name="id_editorial")

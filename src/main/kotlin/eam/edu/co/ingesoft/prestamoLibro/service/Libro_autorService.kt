@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import javax.persistence.EntityManager
 
 @Service
-class Libro_autorService {
+class Libro_autorService() {
     @Autowired
     lateinit var libroAutorRepository: LibroAutorRepository
 

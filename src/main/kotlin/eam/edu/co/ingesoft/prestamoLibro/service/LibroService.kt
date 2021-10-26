@@ -6,6 +6,7 @@ import eam.edu.co.ingesoft.prestamoLibro.repository.LibroRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import javax.persistence.EntityManager
+import javax.persistence.EntityNotFoundException
 
 @Service
 class LibroService {
@@ -23,6 +24,11 @@ class LibroService {
             throw BusinessException("This libro already exists")
         }
         libroRepository.create(libro)
+    }
+
+    fun editLibro(libro: Libro){
+        libroRepository.find(libro.id?:"") ?: throw EntityNotFoundException("This book does not exist")
+        libroRepository.update(libro)
     }
 
     fun entregarLibro(libro: Libro) {
