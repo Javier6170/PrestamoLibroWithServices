@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 * crear usuario
 */
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/users")
 class UserController {
     @Autowired
     lateinit var userService:UserService

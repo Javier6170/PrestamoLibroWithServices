@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 /**
  * todas las operaciones que se definan en este controlador empezaran por /person
  */
-@RequestMapping("/libros")
+@RequestMapping("/books")
 class BookController {
     @Autowired
     lateinit var bookService: BookService

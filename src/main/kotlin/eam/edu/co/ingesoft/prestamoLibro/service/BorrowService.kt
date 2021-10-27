@@ -36,7 +36,6 @@ class BorrowService {
         val libro = bookRepository.find(libroId) ?: throw BusinessException("The book does not exist")
         val cantidadLibro = libro.cantidad
 
-
         if (cantidadLibro <= 0) {
             throw BusinessException("No hay ejemplares de este libro para prestar")
         }
@@ -53,6 +52,5 @@ class BorrowService {
         borrow.id_user=usuario
         borrow.book = libro
         prestamoRepository.create(borrow)
-
     }
 }

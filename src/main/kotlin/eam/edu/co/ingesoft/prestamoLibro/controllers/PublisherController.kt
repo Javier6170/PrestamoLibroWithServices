@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 /**
  * todas las operaciones que se definan en este controlador empezaran por /person
  */
-@RequestMapping("/editoriales")
+@RequestMapping("/publishers")
 class PublisherController {
     @Autowired
     lateinit var publisherService: PublisherService
