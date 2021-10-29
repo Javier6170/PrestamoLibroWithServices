@@ -21,9 +21,9 @@ class UserServiceTest {
 
     @Test
     fun createUserHappyPathTest(){
-        userService.createUser(User("1", "Rodriguez", "Javier"))
+        userService.createUser(User("5", "Rodriguez", "Javier"))
 
-        val userToAssert = entityManager.find(User::class.java, "1")
+        val userToAssert = entityManager.find(User::class.java, "5")
         Assertions.assertNotNull(userToAssert)
         Assertions.assertEquals("Javier", userToAssert.nombre_usuario)
         Assertions.assertEquals("Rodriguez", userToAssert.apellido_usuario)

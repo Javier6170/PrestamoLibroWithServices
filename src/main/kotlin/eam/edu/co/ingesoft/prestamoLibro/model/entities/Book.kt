@@ -21,5 +21,5 @@ data class Book(
 
     @ManyToOne
     @JoinColumn(name="id_editorial")
-    var id_publisher: Publisher
+    val id_publisher: Publisher,
 ): Serializable

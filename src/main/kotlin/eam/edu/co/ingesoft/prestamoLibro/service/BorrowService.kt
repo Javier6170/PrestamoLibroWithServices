@@ -29,6 +29,11 @@ class BorrowService {
         return prestamoRepository.findByUsuario(id)
     }
 
+
+    fun findByUser(id: String) = prestamoRepository.findByUsuario(id)
+
+    fun findBybook(id: String) = prestamoRepository.findByLibro(id)
+
     fun prestarLibro(borrow: Borrow, usuarioId: String, libroId: String) {
         val usuario = userRepository.find(usuarioId)
             ?: throw BusinessException("The user does not exist")

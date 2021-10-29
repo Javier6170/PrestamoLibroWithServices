@@ -3,6 +3,7 @@ package eam.edu.co.ingesoft.prestamoLibro.service
 import eam.edu.co.ingesoft.prestamoLibro.exception.BusinessException
 import eam.edu.co.ingesoft.prestamoLibro.model.entities.Book
 import eam.edu.co.ingesoft.prestamoLibro.repository.BookRepository
+import eam.edu.co.ingesoft.prestamoLibro.repository.BorrowRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import javax.persistence.EntityManager
@@ -12,6 +13,9 @@ import javax.persistence.EntityNotFoundException
 class BookService {
     @Autowired
     lateinit var bookRepository: BookRepository
+
+    @Autowired
+    lateinit var prestamoRepository: BorrowRepository
 
     @Autowired
     lateinit var entityManager: EntityManager
@@ -31,7 +35,7 @@ class BookService {
         bookRepository.update(book)
     }
 
-    fun entregarLibro(id_Libro: String, id_usuario: String) {
+    fun entregarLibro(id_Libro: String, id_usuario: String,id_borrow: Long) {
         bookRepository.find(id_Libro)
             ?: throw BusinessException("This book does not exists")
         val bookFind = entityManager.find(Book::class.java, id_Libro)
@@ -40,5 +44,6 @@ class BookService {
         bookFind.cantidad = cantidadNueva
 
         bookRepository.update(bookFind)
+        prestamoRepository.delete(id_borrow)
     }
 }

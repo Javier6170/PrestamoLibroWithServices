@@ -52,7 +52,7 @@ class bookServiceTest {
         entityManager.persist(publisher)
         entityManager.persist(Book("1", "178643438", 10, "Matematica Vectorial", publisher))
 
-        bookService.entregarLibro("1","1")
+        bookService.entregarLibro("1","1",1L)
 
         val bookAssert = entityManager.find(Book::class.java, "1")
         Assertions.assertEquals(11, bookAssert.cantidad)
@@ -65,7 +65,7 @@ class bookServiceTest {
 
         val exception = Assertions.assertThrows(
             BusinessException::class.java,
-            { bookService.entregarLibro("1","1") }
+            { bookService.entregarLibro("1","1",1L) }
         )
 
         Assertions.assertEquals("This book does not exists", exception.message)

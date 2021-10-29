@@ -21,9 +21,9 @@ class PublisherServiceTest {
 
     @Test
     fun createUserHappyPathTest(){
-        publisherService.createEditorial(Publisher(1L, "castellana"))
+        publisherService.createEditorial(Publisher(30L, "castellana"))
 
-        val publisherToAssert = entityManager.find(Publisher::class.java, 1L)
+        val publisherToAssert = entityManager.find(Publisher::class.java, 30L)
         Assertions.assertNotNull(publisherToAssert)
         Assertions.assertEquals("castellana", publisherToAssert.nombre_editorial)
     }

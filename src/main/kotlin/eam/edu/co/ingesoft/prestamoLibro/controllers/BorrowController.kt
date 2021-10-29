@@ -16,6 +16,5 @@ class BorrowController {
     fun createBorrowBook(@PathVariable("idUsuario") idUsuario: String,@PathVariable("idBook") idBook: String,
                             @Validated @RequestBody borrow: Borrow){
         borrowService.prestarLibro(borrow,idUsuario, idBook)
-
     }
 }
