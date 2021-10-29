@@ -2,7 +2,9 @@ package eam.edu.co.ingesoft.prestamoLibro.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import eam.edu.co.ingesoft.prestamoLibro.model.entities.Book
+import eam.edu.co.ingesoft.prestamoLibro.model.entities.Borrow
 import eam.edu.co.ingesoft.prestamoLibro.model.entities.Publisher
+import eam.edu.co.ingesoft.prestamoLibro.model.entities.User
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,6 +14,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 import javax.persistence.EntityManager
 
 @SpringBootTest
@@ -36,8 +39,6 @@ class BookControllerTest {
         //prerequisitos..
         val publisher = Publisher(1, "Castellana")
         entityManager.persist(publisher)
-        entityManager.persist(Book("1","16551651",10,"Prgramacion web",publisher))
-
         val body = """
            {
             "id": "6",
@@ -64,6 +65,9 @@ class BookControllerTest {
 
     @Test
     fun createBookNotFoundTest() {
+        val publisher = Publisher(1, "Castellana")
+        entityManager.persist(publisher)
+        entityManager.persist(Book("50","56516511",10,"Programacion_web", publisher))
         val body = """
            {
             "id": "50",
@@ -99,19 +103,19 @@ class BookControllerTest {
 
         val body = """
            {
-            "id": "50",
+            "id": "1",
             "isbn_libro":"265416541",
             "cantidad": 20,
             "nombre_Libro": "lAS HISTORIAS DE ARTURITO",
             "id_publisher":{
-                "id": 45,
+                "id": 1,
                 "nombre_editorial": "castellano"
             }
         }
         """.trimIndent()
 
         val request = MockMvcRequestBuilders
-            .put("/books/50")
+            .put("/books/1")
             .contentType(MediaType.APPLICATION_JSON)
             .content(body)
 
@@ -126,13 +130,22 @@ class BookControllerTest {
         //prerequisitos..
         val publisher = Publisher(1, "Castellana")
         entityManager.persist(publisher)
-        entityManager.persist(Book("1","16551651",10,"Prgramacion web",publisher))
-
+        val book = Book("1","16551651",11,"Prgramacion web",publisher)
+        entityManager.persist(book)
+        val person = User("50","Rodriguez","Javier")
+        entityManager.persist(person)
+        val borrow = Borrow(30, Date(2021,10,10),person,book)
+        entityManager.persist(borrow)
         val body = """
+            {
+            "id_borrow": 30,
+            "id_user": "50",
+            "id_Book": "1" 
+            }
         """.trimIndent()
 
         val request = MockMvcRequestBuilders
-            .delete("/books/50/50/30")
+            .delete("/books")
             .contentType(MediaType.APPLICATION_JSON)
             .content(body)
 
@@ -147,13 +160,18 @@ class BookControllerTest {
         //prerequisitos..
         val publisher = Publisher(1, "Castellana")
         entityManager.persist(publisher)
-        entityManager.persist(Book("1","16551651",10,"Prgramacion web",publisher))
+        val book = Book("1","16551651",11,"Prgramacion web",publisher)
+        entityManager.persist(book)
+        val person = User("50","Rodriguez","Javier")
+        entityManager.persist(person)
+        val borrow = Borrow(30, Date(2021,10,10),person,book)
+        entityManager.persist(borrow)
 
         val body = """
         """.trimIndent()
 
         val request = MockMvcRequestBuilders
-            .get("/books/50/borrows")
+            .get("/books/30/borrows")
             .contentType(MediaType.APPLICATION_JSON)
             .content(body)
 

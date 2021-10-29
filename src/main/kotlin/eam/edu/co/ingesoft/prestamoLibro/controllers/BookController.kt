@@ -1,10 +1,10 @@
 package eam.edu.co.ingesoft.prestamoLibro.controllers
 
 import eam.edu.co.ingesoft.prestamoLibro.model.entities.Book
+import eam.edu.co.ingesoft.prestamoLibro.model.requests.BookRequest
 import eam.edu.co.ingesoft.prestamoLibro.service.BookService
 import eam.edu.co.ingesoft.prestamoLibro.service.BorrowService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -31,9 +31,9 @@ class BookController {
         bookService.editLibro(book)
     }
 
-    @DeleteMapping("/{idUsuario}/{idBook}/{idBorrow}")
-    fun entregarLibro(@PathVariable("idUsuario") idUsuario: String, @PathVariable("idBook") idBook: String, @PathVariable("idBorrow") idBorrow: Long) {
-        bookService.entregarLibro(idUsuario, idBook,idBorrow)
+    @DeleteMapping
+    fun entregarLibro(@RequestBody bookRequest: BookRequest) {
+        bookService.entregarLibro(bookRequest.id_Book,bookRequest.id_user,bookRequest.id_borrow)
     }
 
     @GetMapping("/{id}/borrows")

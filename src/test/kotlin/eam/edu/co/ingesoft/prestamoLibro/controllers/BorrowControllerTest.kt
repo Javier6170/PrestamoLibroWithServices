@@ -35,9 +35,15 @@ class BorrowControllerTest {
     @Test
     fun createBorrowHappyPathTest() {
         //prerequisitos..
+        val publisher = Publisher(1, "Castellana")
+        entityManager.persist(publisher)
+        val book = Book("1","16551651",11,"Prgramacion web",publisher)
+        entityManager.persist(book)
+        val person = User("50","Rodriguez","Javier")
+        entityManager.persist(person)
         val body = """
            {
-            "id": 34,
+            "id": 30,
             "fecha_prestamo":"2021-10-28",
             "id_user":{
                 "user_identification": "50",
@@ -45,12 +51,12 @@ class BorrowControllerTest {
                 "nombre_usuario": "Javier"
             },
             "book":{
-                "id": "50",
+                "id": "1",
                 "isbn_libro":"1654654",
                 "cantidad": 50,
                 "nombre_Libro": "Programacion del futuro",
                 "id_publisher":{
-                    "id": 45,
+                    "id": 1,
                     "nombre_editorial": "castellano"
                 }
             }
@@ -58,7 +64,7 @@ class BorrowControllerTest {
         """.trimIndent()
 
         val request = MockMvcRequestBuilders
-            .post("/borrows/50/50")
+            .post("/borrows/50/1")
             .contentType(MediaType.APPLICATION_JSON)
             .content(body)
 

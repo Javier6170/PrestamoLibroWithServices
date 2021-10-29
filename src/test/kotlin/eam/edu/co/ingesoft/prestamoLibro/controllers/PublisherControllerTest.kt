@@ -54,6 +54,8 @@ class PublisherControllerTest {
 
     @Test
     fun createUserNotFoundTest() {
+        val publisher = Publisher(45, "Castellana")
+        entityManager.persist(publisher)
         val body = """
            {
             "id": 45,

@@ -53,6 +53,8 @@ class UserControllerTest {
 
     @Test
     fun createUserNotFoundTest() {
+        //prerequisito...
+        entityManager.persist(User("50","Rodriguez","Javier"))
         val body = """
            {
             "user_identification": "50",
