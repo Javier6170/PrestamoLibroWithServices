@@ -1,8 +1,6 @@
 package eam.edu.co.ingesoft.prestamoLibro.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import eam.edu.co.ingesoft.prestamoLibro.model.entities.Book
-import eam.edu.co.ingesoft.prestamoLibro.model.entities.Publisher
 import eam.edu.co.ingesoft.prestamoLibro.model.entities.User
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
